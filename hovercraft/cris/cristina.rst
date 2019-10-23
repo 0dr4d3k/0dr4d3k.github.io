@@ -1,6 +1,6 @@
-:title: Hovercraft! demo
-:data-transition-duration: 1500
+:title: Cristina
 :css: hovercraft.css
+:skip-help: true
 
 ----
 
@@ -12,19 +12,20 @@ Hola Cristina:
 
 ----
 
-:id: bonita
-:data-y: r1200
-:data-rotate-x: 180
+:id: pregunta
+:data-x: 0
+:data-y: 0
+:data-z: 0
+:data-rotate-y: r90
 
 *¡¡¡Cómo eres tan bonita!!!*
 ============================
 
 ----
 
-:data-x: 0
-:data-y: 2500
-:data-z: 8000
-:data-rotate-x: 180
+:id: respuesta
+:data-y: r1500 
+:data-rotate-y: 90
 
 **Mariloli**
 ===============
