@@ -1,0 +1,19 @@
+<b>Num Cells</b>:&nbsp;&nbsp;<%= numCells %><br/><br/>
+<a href="#" class="clearCells btn btn-block btn-lg btn-danger">Clear All Cells</a><br/>
+<b>Aspect Ratio</b>:&nbsp;&nbsp;
+    <input data-property="aspectRatio" data-key="x" data-min-exclusive="0" data-max="1" value="<%= aspectRatio.x %>" placeholder="X" class="form-control lattice floatInput" type="text">&nbsp;
+    <input data-property="aspectRatio" data-key="y" data-min-exclusive="0" data-max="1" value="<%= aspectRatio.y %>" placeholder="Y" class="form-control lattice floatInput" type="text">&nbsp;
+    <input data-property="aspectRatio" data-key="z" data-min-exclusive="0" data-max="1" value="<%= aspectRatio.z %>" placeholder="Z" class="form-control lattice floatInput" type="text"><br/>
+<label>components of aspect ratio must be > 0 and <= 1</label><br/><br/>
+<b>Units</b>:&nbsp;&nbsp;
+    <div class="btn-group">
+        <button data-toggle="dropdown" class="btn dropdown-toggle" type="button"><%= allUnitTypes[units].name %><span class="caret"></span></button>
+        <ul role="menu" class="dropdown-menu">
+            <% _.each(allUnitTypes, function(unitType, id){ %>
+                <li><a class="lattice dropdownSelector" data-property="units" data-value="<%= id %>" href="#"><%= unitType.name %></a></li>
+            <% }); %>
+        </ul>
+    </div><br/><br/>
+<b>Scale Multiplier</b>:&nbsp;&nbsp;<input data-property="scaleMultiplier" data-min-exclusive="0" data-max="100" value="<%= scaleMultiplier %>" placeholder="scale" class="form-control lattice floatInput" type="text"><br/><br/>
+<b>Unit Cell Scale</b>:&nbsp;&nbsp;
+    <%= scale.x.toFixed(2)%> x <%= scale.y.toFixed(2)%> x <%= scale.z.toFixed(2)%> <%= allUnitTypes[units].name %><sup>3</sup><br/><br/>

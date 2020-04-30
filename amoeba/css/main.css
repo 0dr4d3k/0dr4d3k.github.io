@@ -1,0 +1,283 @@
+
+
+body {
+    overflow:hidden;/*hide scroll bar*/
+}
+
+html, body {
+    height: 100%;
+}
+
+.checkbox input[type="checkbox"].custom-checkbox:checked + .icons .icon-checked, .radio input[type="checkbox"].custom-checkbox:checked + .icons .icon-checked, .checkbox input[type="radio"].custom-radio:checked + .icons .icon-checked, .radio input[type="radio"].custom-radio:checked + .icons .icon-checked {
+    color: #888;
+}
+
+pre {
+    display: inline;
+    border: none;
+    background-color: rgba(0,0,0,0);
+}
+
+.fullWidth {
+    width: 100%!important;
+}
+
+#threeContainer {
+    top: 0px;
+    position: absolute;
+}
+
+/*menus*/
+
+#menuWrapper{
+    width: 430px;
+    right: -430px;/*initially hidden*/
+    position: absolute;
+    height: 100%;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+#menuHeader{
+    overflow: hidden;
+}
+
+#menuContent{
+    padding: 30px 30px 100px 30px;
+    overflow-y: scroll;
+    top: 50px;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+
+hr {
+  border-color: #888 -moz-use-text-color #888;
+}
+
+
+#gcodeEditor {
+    font-family: Courier, monospace;
+    font-size: 13px;
+    line-height: 30px;
+    height: 400px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.5);
+    white-space: pre-wrap;
+    padding: 15px 0 15px 13px;
+    overflow: auto;
+}
+
+#gcodeEditor:focus {
+    outline-width: 0;
+}
+
+#gcodeHighlighter{
+    padding: 0 0 0 10px;
+    width: 100%;
+    margin: 0 0 0 -10px;
+    left: -15px;
+    display: inline-block;
+    background-color: rgba(255, 255, 0, 0.35);
+}
+
+.inlineWarning {
+    background-color: rgba(255,0,0,0.15);
+    padding: 15px 20px;
+    margin: 0 0 20px 0;
+}
+
+input.intInput, input.floatInput{
+    width:19%;
+    display: inline;
+    padding: 8px 8px;
+}
+.btn-halfWidth {
+    width: 47%;
+}
+
+.halfWidth {
+    width: 47%;
+    display: inline-block;
+}
+
+.seventyFiveWidth{
+    width: 75%;
+    display: inline-block;
+}
+
+label {
+    font-size: 14px!important;
+}
+
+.btn-selected {
+    background-color: #8E8E8E;
+}
+.btn-selected:hover {
+    background-color: #8E8E8E;
+}
+
+.btn-group > .btn {
+    background-color: #ccc;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
+.materialColorSwatch{
+    height: 30px;
+    width: 100%;
+}
+.materialColorSwatch>div {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-right: 10px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.materialColorSwatch>span{
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 20px;
+}
+
+.materialColorSwatch img{
+    width: 29px;
+    height: 29px;
+}
+
+.editComposite, .editMaterial {
+    margin-left:20px;
+}
+
+.materialListTitle{
+      display: inline-flex;
+      max-width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+}
+
+.red {
+    color:red;
+}
+
+
+.checkbox .icons, .radio .icons, .checkbox input[type="checkbox"].custom-checkbox, .radio input[type="checkbox"].custom-checkbox, .checkbox input[type="radio"].custom-radio, .radio input[type="radio"].custom-radio {
+    margin-top: -10px;
+    top:50%;
+}
+
+#contextMenuWrapper{
+    background-color: clear;
+    padding: 20px;
+    position: absolute;
+    z-index: 10;
+    display: none;
+}
+
+#contextMenu {
+    background-color: #555;
+    width: 200px;
+    color: white;
+    opacity: 0.95;
+    border-radius: 5px;
+
+    font-weight: 400;
+    font-size: 14px;
+}
+
+#contextMenu li{
+    list-style: none;
+    height: 32px;
+    padding: 2px 20px;
+}
+#contextMenu li:hover{
+    background-color: #aaa;
+}
+#contextMenu li.divider{
+    height:2px;
+}
+
+#contextMenu li>a{
+    padding:6px 9px;
+    line-height:1.429;
+    color: #e1e4e7;
+    display: block;
+    font-weight:400;
+    white-space: nowrap;
+}
+
+#contextMenu ul {
+    padding: 2px 0 2px 0;
+}
+
+#contextMenu li>a{
+    text-decoration: none;
+}
+
+.tab1 {
+    padding: 0 0 0 25px;
+}
+
+.waveformIcon {
+    margin-left: 10px;
+    width: 40px;
+}
+
+.modal-header{
+        text-align: center;
+    border: 0px;
+}
+
+.modal-title{
+    font-weight: 700;
+}
+
+.modal-content{
+    -webkit-border-radius:0px;
+    -moz-border-radius:0px;
+    border-radius:0px;
+    text-align: center;
+}
+
+#comingSoon, #genericModal{
+    top:20%;
+}
+
+.materialVisibility{
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 20px;
+    margin-top: 10px;
+}
+
+.leftOffset{
+    left: 30px!important;
+}
+
+.normalStylingCheckbox{
+    font-size: 18px!important;
+}
+
+input:focus{
+    border-color: #000!important;
+}
+
+button, button:focus, button:visited, button:hover{
+    outline: none;
+}
+
+.indent{
+        padding-left: 15px;
+}
