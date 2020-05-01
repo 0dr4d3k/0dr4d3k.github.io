@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moon Section</title>
+
+    <link href="dependencies/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="dependencies/flat-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="dependencies/jquery-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+
+    <script type="text/javascript" src="dependencies/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="dependencies/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="dependencies/flat-ui.min.js"></script>
+    <script type="text/javascript" src="dependencies/three.js"></script>
+    <script type="text/javascript" src="dependencies/binary_stl_writer.js"></script>
+    <script type="text/javascript" src="dependencies/OrthographicTrackballControls.js"></script>
+    <script type="text/javascript" src="dependencies/FileSaver.min.js"></script>
+    <script type="text/javascript" src="dependencies/underscore-min.js"></script>
+    <script type="text/javascript" src="dependencies/EffectComposer.js"></script>
+    <script type="text/javascript" src="dependencies/MaskPass.js"></script>
+    <script type="text/javascript" src="dependencies/ShaderPass.js"></script>
+    <script type="text/javascript" src="dependencies/CopyShader.js"></script>
+    <script type="text/javascript" src="dependencies/SSAOShader.js"></script>
+    <script type="text/javascript" src="dependencies/Detector.js"></script>
+    <script type="text/javascript" src="dependencies/RenderPass.js"></script>
+
+    <script type="text/javascript" src="js/crop.js"></script>
+    <script type="text/javascript" src="js/threeView.js"></script>
+    <script type="text/javascript" src="js/controls.js"></script>
+    <script type="text/javascript" src="js/node.js"></script>
+
+    <script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+<img style="display: none;" id="heightmapSmall" src="moonheightmap1000.png"/>
+<canvas style="display: none;" id="imgLoader"></canvas>
+<div  id="threeContainer"></div>
+<div id="controls">
+    <a id="about" href="#" class="btn btn-lg btn-default">About</a><br/>
+    <div id="geoControls" class="exportView floatRight fullWidth">
+        <b>Geometry Controls:</b><br/>
+        <!--<div class="sliderInput cropView" id="radius">-->
+            <!--<span class="label-slider">Radius (km) : </span><div class="flat-slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"></div>-->
+            <!--<input value="" placeholder="" class="form-control" type="text">-->
+        <!--</div>-->
+        <div class="sliderInput" id="scale">
+            <span class="label-slider">Feature Scale (km) : </span><div class="flat-slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"></div>
+            <input value="" placeholder="" class="form-control" type="text">
+        </div>
+        <div class="sliderInput" id="baseThickness">
+            <span class="label-slider">Base Thickness (in) : </span><div class="flat-slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"></div>
+            <input value="" placeholder="" class="form-control" type="text">
+        </div>
+        <a id="reset" href="#" class="floatRight btn btn-lg btn-default">Reset Geometry to Defaults</a><br/>
+    </div>
+    <div id="cropControls" class="cropView floatRight fullWidth"><b>Crop Controls:</b><br/>
+        <span class="label-slider floatRight">Position (&theta;, &phi; in radians)&nbsp;&nbsp; <input id="theta" value="" placeholder="" class="form-control int" type="text">
+                &nbsp; <input id="phi" value="" placeholder="" class="form-control int" type="text"></span><br/><br/>
+        <div class="sliderInput" id="cropSize">
+            <span class="label-slider">Size (km) : </span><div class="flat-slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"></div>
+            <input value="" placeholder="" class="form-control" type="text">
+        </div>
+        <div class="sliderInput" id="cropRotation">
+            <span class="label-slider">Rotation (radians) : </span><div class="flat-slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"></div>
+            <input value="" placeholder="" class="form-control" type="text">
+        </div>
+    </div>
+    <a id="crop" href="#" class="cropView btn btn-lg btn-default">Crop Region</a><br/>
+    <a id="back" href="#" class="exportView btn btn-lg btn-default">Back to Crop Tool</a><br/>
+</div>
+<div id="controlsLeft" class="flipped">
+    <div>
+        <b>Rendering Settings:</b><br/><br/>
+        <div class="indent">
+            Material:
+            <div class="indent">
+                <label class="radio">
+                    <input name="materialType" value="white" data-toggle="radio" class="custom-radio" type="radio"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+                    Realistic Material
+                </label>
+                <label class="radio">
+                    <input name="materialType" value="normal" data-toggle="radio" class="custom-radio" type="radio"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+                    Normal Material
+                </label>
+            </div><br/>
+            <label class="checkbox" for="ssao">
+                <input id="ssao" data-toggle="checkbox" class="custom-checkbox layersSelector" type="checkbox"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+                Ambient Occlusion
+            </label>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p><b>Moon Section</b><br/><br/>
+                    In 2011, teams from  NASA, the Goddard Space Flight Center, the German Aerospace Center, and Arizona State University used images captured by the <a href="http://lroc.sese.asu.edu/about" target="_blank">Lunar Reconnaissance Orbiter Camera (LROC)</a> to put together a topographic map of (nearly) the entire moon's surface.
+                    This is a browser-based tool for visualizing and cropping 3D sections of the LROC topographic dataset so that the curvature of the moon is reflected in the 3D geometry.
+                    <br/><br/>
+                    <img class="fullWidth" src="moonheightmap1000.png"/>
+                    <br/><br/>
+                    This rendering of the moon shows topology without any color information, which is why it looks a little different from what we're used to.
+                    <a href="http://lroc.sese.asu.edu/posts/451" target="_blank">According to the LROC</a>,
+                    the heightmap shows changes in elevation ranging from -9.15km to +10.76km from the average radius of the moon,
+                    <a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html" target="_blank">1736km</a>.
+                <br/><br/>
+                Built by <a href="http://www.amandaghassaei.com/" target="_blank">Amanda Ghassaei</a>,
+                code available on <a href="https://github.com/amandaghassaei/MoonSection" target="_blank">Github</a>.
+                </p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="center modal-body">
+                <p>Loading Data...</p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="holdon" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="center modal-body">
+                <p>This may take a minute...<br/>
+                <span id="percentCompletion"></span></p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</body>
+</html>
