@@ -1,6 +1,0 @@
-[submodule "impress.js/extras"]
-	path = impress.js/extras
-	url = https://github.com/impress/impress-extras.git
-[submodule "hovercraft/scr"]
-	path = hovercraft/scr
-	url = https://github.com/regebro/hovercraft.git
